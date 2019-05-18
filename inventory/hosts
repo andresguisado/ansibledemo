@@ -1,0 +1,2 @@
+[newMachines]
+test-app ansible_user=root
