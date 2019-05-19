@@ -1,5 +1,7 @@
 ---
 - hosts: localhost
+  roles:
+    - role: cyberark.conjur-lookup-plugin
   tasks:
     - name: Retrieve secret with master identity
       vars:
