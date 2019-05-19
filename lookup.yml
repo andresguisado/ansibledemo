@@ -1,7 +1,9 @@
 ---
-	- hosts: localhost
-	  tasks:
-	    - name: Retrieve secret with master identity
-	      vars:
-	        super_secret_key: "{{ lookup('retrieve_conjur_variable', 'ansible/github_key') }}"
-	      shell: echo "Yay! {{super_secret_key}} was just retrieved with Conjur"
+- hosts: localhost
+  roles:
+    - role: cyberark.conjur-lookup-plugin
+  tasks:
+    - name: Retrieve secret with master identity
+      vars:
+        super_secret_key: "{{ lookup('retrieve_conjur_variable', 'ansible/github_key') }}"
+      shell: echo "Yay! {{super_secret_key}} was just retrieved with Conjur"
