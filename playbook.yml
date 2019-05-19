@@ -2,7 +2,7 @@
   tasks:
     - name: Retrieve secret with master identity
       vars:
-        super_secret_key: {{ lookup('retrieve_conjur_variable', 'path/to/secret') }}
+        super_secret_key: {{ lookup('retrieve_conjur_variable', 'ansible/github_key') }}
       shell: echo "Yay! {{super_secret_key}} was just retrieved with Conjur"
       register: foo
     - debug: msg="the echo was {{ foo.stdout }}"
