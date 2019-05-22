@@ -17,7 +17,7 @@
     - name: Write SSH Private Key to TempFile
       copy:
         dest: "{{ temp_key.path }}"
-        content: "{{ key_value.content }}"
+        content: "{{ key_value }}"
       delegate_to: localhost
       changed_when: false
       no_log: no
