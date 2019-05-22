@@ -1,5 +1,6 @@
 ---
 - hosts: localhost
+  gather_facts: yes
   roles:
     - role: cyberark.conjur-lookup-plugin
   vars:
