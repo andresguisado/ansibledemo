@@ -2,6 +2,7 @@
 - hosts: localhost
   roles:
     - role: cyberark.conjur-lookup-plugin
+    
   tasks:
     - name: Retrieve Username and SSH Private Key for Hosts
       vars:
@@ -34,3 +35,10 @@
   vars:
     ansible_ssh_user: "{{ hostvars['localhost']['cyberark_username'] }}"
     ansible_ssh_private_key_file: "{{ hostvars['localhost']['cyberark_ssh_privatekey'] }}"
+
+  tasks:
+    - name: Verify the filesystems
+      command: df -h
+      register: df
+    - name: print df output in json
+      debug: var=df.stdout_lines
