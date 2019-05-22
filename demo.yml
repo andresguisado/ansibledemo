@@ -12,7 +12,7 @@
         state: file
         suffix: key
       register: temp_key
-      no_log: yes
+      no_log: no
 
     - name: Write SSH Private Key to TempFile
       copy:
@@ -20,13 +20,13 @@
         content: "{{ key_value.content }}"
       delegate_to: localhost
       changed_when: false
-      no_log: yes
+      no_log: no
       
     - name: Set Username and SSH Private Key TempFile to a Fact
       set_fact:
         cyberark_username: "{{ username_value }}"
         cyberark_ssh_privatekey: "{{ temp_key.path }}"
-      no_log: yes
+      no_log: no
 
 - hosts: all
   gather_facts: yes
