@@ -1,6 +1,4 @@
-- hosts: localhost
-  vars:
-    cert: "{{lookup('env', 'CONJUR_CERT_FILE')}}"
+- hosts: servers
   roles:
     - role: cyberark.conjur-host-identity
       conjur_appliance_url: "{{ lookup('env','CONJUR_APPLIANCE_URL') }}"
