@@ -42,3 +42,8 @@
       conjur_host_name: "{{inventory_hostname}}"
       conjur_validate_certs: false
       conjur_ssl_certificate: "{{lookup('env', 'CONJUR_CERT_FILE')}}"
+      
+   tasks:
+     - name: Fetch secret using Summon
+     shell: "summon --yaml 'DB_PASSWORD: !var AAM_Vault/ansible/DevOps_Safe/ip-192-168-20-63.ec2.internal/username' env | grep DB_"
+     
