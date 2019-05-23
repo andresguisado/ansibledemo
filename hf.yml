@@ -45,7 +45,7 @@
       
   tasks:
     - name: Fetch secret using Summon
-    shell: "summon --yaml 'DB_PASSWORD: !var AAM_Vault/ansible/DevOps_Safe/ip-192-168-20-63.ec2.internal/username'"
+    shell: summon --yaml 'DB_PASSWORD: !var AAM_Vault/ansible/DevOps_Safe/ip-192-168-20-63.ec2.internal/username'
     
     - name: Echo secret
     shell: echo $DB_PASSWORD
