@@ -1,4 +1,38 @@
+---
+- hosts: localhost
+  roles:
+    - role: cyberark.conjur-lookup-plugin
+  vars:
+    username_value: "{{ lookup('retrieve_conjur_variable', 'AAM_Vault/ansible/DevOps_Safe/ip-192-168-20-63.ec2.internal/username') }}"
+    key_value: "{{ lookup('retrieve_conjur_variable', 'AAM_Vault/ansible/DevOps_Safe/ip-192-168-20-63.ec2.internal/password') }}"
+        
+  tasks: 
+    - name: Initiate TempFile Module for SSH Private Key
+      tempfile:
+        state: file
+        suffix: key
+      register: temp_key
+      no_log: yes
+
+    - name: Write SSH Private Key to TempFile
+      copy:
+        dest: "{{ temp_key.path }}"
+        content: "{{ key_value }}"
+      delegate_to: localhost
+      changed_when: false
+      no_log: yes
+      
+    - name: Set Username and SSH Private Key TempFile to a Fact
+      set_fact:
+        cyberark_username: "{{ username_value }}"
+        cyberark_ssh_privatekey: "{{ temp_key.path }}"
+      no_log: yes
+
 - hosts: servers
+  gather_facts: yes
+  vars:
+    ansible_ssh_user: "{{ hostvars['localhost']['cyberark_username'] }}"
+    ansible_ssh_private_key_file: "{{ hostvars['localhost']['cyberark_ssh_privatekey'] }}"
   roles:
     - role: cyberark.conjur-host-identity
       conjur_appliance_url: "{{ lookup('env','CONJUR_APPLIANCE_URL') }}"
