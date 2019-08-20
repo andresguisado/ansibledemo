@@ -1,0 +1,8 @@
+---
+- hosts: all
+  tasks:
+    - name: Verify the filesystems
+      command: df -h
+      register: df
+    - name: print df output in json
+      debug: var=df.stdout_lines
