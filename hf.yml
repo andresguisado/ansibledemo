@@ -3,8 +3,8 @@
   roles:
     - role: cyberark.conjur-lookup-plugin
   vars:
-    username_value: "{{ lookup('retrieve_conjur_variable', 'AAM_Vault/ansible/DevOps_Safe/ip-192-168-20-63.ec2.internal/username') }}"
-    key_value: "{{ lookup('retrieve_conjur_variable', 'AAM_Vault/ansible/DevOps_Safe/ip-192-168-20-63.ec2.internal/password') }}"
+    username_value: "{{ lookup('retrieve_conjur_variable', 'AAM_Vault/ansible/DevOps_Safe/ip-192-168-20-245.ec2.internal/username') }}"
+    key_value: "{{ lookup('retrieve_conjur_variable', 'AAM_Vault/ansible/DevOps_Safe/ip-192-168-20-245.ec2.internal/password') }}"
         
   tasks: 
     - name: Initiate TempFile Module for SSH Private Key
