@@ -2,3 +2,4 @@
   tasks:
     - name: Retrieve secret from Conjur
       shell: echo "Yay! {{ansible_ssh_user}}:{{ansible_ssh_pass}} was just retrieved with Conjur"
+      no_log: no
